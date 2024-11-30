@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbtd7hnh2mffd"]
+
+[ext_resource type="Script" path="res://script/arrow.gd" id="1_8py8f"]
+[ext_resource type="Texture2D" uid="uid://b77ob4hoy3uj4" path="res://icon.svg" id="1_cqtvi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gv2gp"]
+radius = 9.0
+height = 78.0
+
+[sub_resource type="GDScript" id="GDScript_bol6q"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="arrow" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_8py8f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+rotation = 1.5708
+scale = Vector2(0.0625, 0.539063)
+texture = ExtResource("1_cqtvi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gv2gp")
+script = SubResource("GDScript_bol6q")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(0.3, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
